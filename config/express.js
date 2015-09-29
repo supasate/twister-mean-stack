@@ -62,7 +62,7 @@ module.exports = function(db) {
 
 	// Set views path and view engine
 	app.set('view engine', 'server.view.jade');
-	app.set('views', './app/views');
+	app.set('views', ['./app/views', './public']);
 
 	// Environment dependent middleware
 	if (process.env.NODE_ENV === 'development') {
@@ -110,13 +110,13 @@ module.exports = function(db) {
 	app.use(helmet.ienoopen());
 	app.disable('x-powered-by');
 
-	// Setting the app router and static folder
-	app.use(express.static(path.resolve('./public')));
-
 	// Globbing routing files
 	config.getGlobbedFiles('./app/routes/**/*.js').forEach(function(routePath) {
 		require(path.resolve(routePath))(app);
 	});
+
+	// Setting the app router and static folder
+	app.use(express.static(path.resolve('./public')));
 
 	// Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
 	app.use(function(err, req, res, next) {
