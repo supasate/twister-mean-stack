@@ -1,0 +1,41 @@
+div(data-ng-contrller='FeedController')
+  .container.body
+    .left-panel
+      .profile
+        .header
+          a(href='me.jade')
+            .name {{ profile.name }}
+          a(href='me.jade')
+            .screen-name @{{ profile.screenName }}
+        // /.header
+        .detail.last-section
+          .col
+            .text Tweets
+            .number {{ profile.tweetCount }}
+          .col
+            .text Followers
+            .number {{ profile.followerCount }}
+          .col
+            .text Following
+            .number {{ profile.followingCount }}
+        // /.detail
+      // /.border-box .profile
+    .main-panel
+      .new-tweet.first-item
+        form.form-horizontal
+          .form-group
+            .tweet-text.col-sm-10
+              input#tweetText.form-control(type='text', placeholder="What's happening")
+            .col-sm-2
+              input.btn.btn-default(type='button', value='Tweet')
+      .tweet(data-ng-repeat="tweet in tweets")
+        a(href='user.jade')
+          .name
+            | {{ tweet.name }}
+          .screen-name
+            |  @{{ tweet.screenName }}
+        .tweet-text
+          | {{ tweet.tweetText }}
+        .action
+          .reply
+            i.fa.fa-reply
