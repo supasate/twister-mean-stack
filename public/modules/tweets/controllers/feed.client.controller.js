@@ -48,6 +48,7 @@ angular.module('tweets').controller('FeedController', [
             });
 
             $scope.tweetText = '';
+            $scope.profile.tweetCount += 1;
         };
 
         $scope.replyTo = function(screenName) {
