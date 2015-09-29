@@ -37,5 +37,5 @@ div(data-ng-controller='FeedController')
         .tweet-text
           | {{ tweet.tweetText }}
         .action
-          .reply
+          .reply(data-ng-click="replyTo(tweet.screenName)")
             i.fa.fa-reply

@@ -2,7 +2,8 @@
 
 angular.module('tweets').controller('FeedController', [
     '$scope',
-    function($scope) {
+    '$modal',
+    function($scope, $modal) {
         $scope.profile = {
             name: 'Supasate Choochaisri',
             screenName: 'kaizerwing',
@@ -47,6 +48,23 @@ angular.module('tweets').controller('FeedController', [
             });
 
             $scope.tweetText = '';
+        };
+
+        $scope.replyTo = function(screenName) {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/modules/tweets/views/replymodal.client.view.jade',
+                controller: 'ReplyModalController',
+                resolve: {
+                    tweetText: function() {
+                        return '@' + screenName + ' ';
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(tweetText) {
+                $scope.postTweet(tweetText, $scope.profile.name, $scope.profile.screenName);
+            });
         };
     }
 ]);
