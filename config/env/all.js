@@ -7,7 +7,7 @@ module.exports = {
 		keywords: 'twitter, clone, mean'
 	},
 	port: process.env.PORT || 3000,
-	templateEngine: 'swig',
+	templateEngine: 'jade',
 	sessionSecret: 'MEAN',
 	sessionCollection: 'sessions',
 	assets: {

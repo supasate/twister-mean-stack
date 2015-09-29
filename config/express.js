@@ -57,11 +57,11 @@ module.exports = function(db) {
 	// Showing stack errors
 	app.set('showStackError', true);
 
-	// Set swig as the template engine
-	app.engine('server.view.html', consolidate[config.templateEngine]);
+	// Set jade as the template engine
+	app.engine('server.view.jade', consolidate[config.templateEngine]);
 
 	// Set views path and view engine
-	app.set('view engine', 'server.view.html');
+	app.set('view engine', 'server.view.jade');
 	app.set('views', './app/views');
 
 	// Environment dependent middleware
