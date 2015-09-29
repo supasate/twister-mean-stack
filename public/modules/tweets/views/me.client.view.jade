@@ -1,53 +1,31 @@
-.container.body
-  .left-panel
-    .profile
-      .header
-        .name Arnupharp Viratanapanu
-        .screen-name @topscores
-      // /.header
-      .detail.last-section
-        .col
-          .text Tweets
-          .number 327
-        .col
-          .text Followers
-          .number 163
-        .col
-          .text Following
-          .number 500
-      // /.detail
-    // /.border-box .profile
-  .main-panel
-    .tweet.first-item
-      .name
-        | Arnupharp Viratanapanu
-      .screen-name
-        | @topscores
-      .tweet-text
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id sollicitudin urna. Aenean vitae dapibus quam. Suspendisse volutpat.
-      .action
-        .reply(data-toggle='modal', data-target='#replyModal')
-          i.fa.fa-reply
-    .tweet
-      .name
-        | Arnupharp Viratanapanu
-      .screen-name
-        | @topscores
-      .tweet-text
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id sollicitudin urna. Aenean vitae dapibus quam. Suspendisse volutpat.
-      .action
-        .reply(data-toggle='modal', data-target='#replyModal')
-          i.fa.fa-reply
-    .tweet
-      .retweeted
-        | Arnupharp Viratanapanu retweeted
-      a(href='user.jade')
+div(data-ng-controller="MeController")
+  .container.body
+    .left-panel
+      .profile
+        .header
+          .name {{ profile.name }}
+          .screen-name @{{ profile.screenName }}
+        // /.header
+        .detail.last-section
+          .col
+            .text Tweets
+            .number {{ profile.tweetCount }}
+          .col
+            .text Followers
+            .number {{ profile.followerCount }}
+          .col
+            .text Followings
+            .number {{ profile.followingCount }}
+        // /.detail
+      // /.border-box .profile
+    .main-panel
+      .tweet(data-ng-repeat="tweet in tweets", data-ng-class="{'first-item' : $first}")
         .name
-          | Supasate Choochaisri
+          | {{ tweet.name }}
         .screen-name
-          | @kaizerwing
-      .tweet-text
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id sollicitudin urna. Aenean vitae dapibus quam. Suspendisse volutpat.
-      .action
-        .reply(data-toggle='modal', data-target='#replyModal')
-          i.fa.fa-reply
+          |  @{{ tweet.screenName }}
+        .tweet-text
+          | {{ tweet.tweetText }}
+        .action
+          .reply
+            i.fa.fa-reply
