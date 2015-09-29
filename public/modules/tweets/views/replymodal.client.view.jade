@@ -1,0 +1,15 @@
+// Reply Modal
+#replyModal.modal.fade(aria-labelledby='replyModalLabel', tabindex='-1', role='dialog')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true') ×
+        h4#replyModalLabel.modal-title Reply
+      .modal-body
+        form
+          .text-area-wrapper
+            textarea.text-area(rows='4', cols='52') @topscores
+          .text-right
+            input.btn.btn-default(type='submit', value='Reply')
+            input.btn.btn-danger(type='button', data-dismiss='modal', value='Close')
