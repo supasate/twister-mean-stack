@@ -25,10 +25,10 @@ div(data-ng-controller='FeedController')
         form.form-horizontal
           .form-group
             .tweet-text.col-sm-10
-              input#tweetText.form-control(type='text', placeholder="What's happening")
+              input#tweetText.form-control(type='text', placeholder="What's happening", data-ng-model="tweetText")
             .col-sm-2
-              input.btn.btn-default(type='button', value='Tweet')
-      .tweet(data-ng-repeat="tweet in timeline")
+              input.btn.btn-default(type='button', value='Tweet', data-ng-click="postTweet(tweetText, profile.name, profile.screenName)")
+      .tweet(data-ng-repeat="tweet in timeline | orderBy: '-tweetTime'")
         a(href='user.jade')
           .name
             | {{ tweet.name }}
