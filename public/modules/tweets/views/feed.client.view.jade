@@ -1,4 +1,4 @@
-div(data-ng-contrller='FeedController')
+div(data-ng-controller='FeedController')
   .container.body
     .left-panel
       .profile
@@ -28,7 +28,7 @@ div(data-ng-contrller='FeedController')
               input#tweetText.form-control(type='text', placeholder="What's happening")
             .col-sm-2
               input.btn.btn-default(type='button', value='Tweet')
-      .tweet(data-ng-repeat="tweet in tweets")
+      .tweet(data-ng-repeat="tweet in timeline")
         a(href='user.jade')
           .name
             | {{ tweet.name }}

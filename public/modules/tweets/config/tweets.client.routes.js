@@ -11,6 +11,6 @@ angular.module('tweets').config([
         .state('feed', {
             url: '/',
             templateUrl: '/modules/tweets/views/feed.client.view.jade'
-        })
+        });
     }
 ]);
