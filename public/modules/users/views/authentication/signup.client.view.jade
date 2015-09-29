@@ -1,0 +1,17 @@
+.signup-form(data-ng-controller='AuthenticationController')
+  .logo.text-center Sign up
+  form(name="userForm", data-ng-submit="signup()", novalidate, autocomplete="off")
+    .form-group
+      input.form-control(type='text', placeholder='Username', data-ng-model='credentials.username')
+    .form-group
+      input.form-control(type='text', placeholder='Firstname', data-ng-model='credentials.firstName')
+    .form-group
+      input.form-control(type='text', placeholder='Lastname', data-ng-model='credentials.lastName')
+    .form-group
+      input.form-control(type='email', placeholder='youremail@email.com', data-ng-model='credentials.email')
+    .form-group
+      input.form-control(type='password', placeholder='Password', data-ng-model='credentials.password')
+    .form-group.text-right
+      button.btn.btn-primary(type='submit') Sign up
+    .text-center.text-danger(data-ng-show='error')
+      strong(data-ng-bind='error')
