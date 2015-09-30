@@ -23,7 +23,7 @@ angular.module('users').config(['$stateProvider',
 		}).
 		state('signin', {
 			url: '/signin',
-			templateUrl: 'modules/users/views/authentication/signin.client.view.html'
+			templateUrl: 'modules/users/views/authentication/signin.client.view.jade'
 		}).
 		state('forgot', {
 			url: '/password/forgot',

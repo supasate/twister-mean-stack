@@ -1,0 +1,15 @@
+.login-form(data-ng-controller="AuthenticationController")
+  form(data-ng-submit="signin()")
+    .form-group
+      a.btn.btn-primary.form-control(href='/auth/facebook') Log in with Facebook
+    .login-label
+      | ------------------------ OR ------------------------ 
+      br
+      br
+      |           Log in with your username
+    .form-group
+      input.form-control(type='text', placeholder='Username', data-ng-model='credentials.username')
+    .form-group
+      input.form-control(type='password', placeholder='Password', data-ng-model='credentials.password')
+    .form-group.text-right
+      button.btn.btn-default(type='submit') Log in
