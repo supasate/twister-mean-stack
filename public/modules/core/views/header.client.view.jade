@@ -1,4 +1,4 @@
-nav.navbar.navbar-default.navbar-fixed-top
+nav.navbar.navbar-default.navbar-fixed-top(data-ng-controller='HeaderController')
   .container
     // Brand and toggle get grouped for better mobile display
     .navbar-header
@@ -10,8 +10,10 @@ nav.navbar.navbar-default.navbar-fixed-top
       a.navbar-brand(href='feed.jade') Twister
     // Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      form.navbar-form.navbar-right(role='logout')
-        a.btn.btn-default(href='login.html') Log in
-        a.btn.btn-primary(href='signup.html') Sign up
+      form.navbar-form.navbar-right(role='signin', data-ng-if='!authentication.user')
+        a.btn.btn-default(data-ui-sref='signin') Sign in
+        a.btn.btn-primary(data-ui-sref='signup') Sign up
+      form.navbar-form.navbar-right(role='signout', data-ng-if='authentication.user')
+        a.btn.btn-primary(href='/auth/signout') Sign out
     // /.navbar-collapse
   // /.container
