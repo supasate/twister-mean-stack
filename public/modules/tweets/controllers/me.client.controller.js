@@ -3,7 +3,8 @@
 angular.module('tweets').controller('MeController', [
     '$scope',
     'Authentication',
-    function($scope, Authentication) {
+    '$http',
+    function($scope, Authentication, $http) {
         $scope.profile = {
             name: Authentication.user.displayName,
             screenName: Authentication.user.username,
@@ -12,17 +13,12 @@ angular.module('tweets').controller('MeController', [
             followingCount: 140
         };
 
-        $scope.tweets = [
-            {
-                name: 'Supasate Choochaisri',
-                screenName: 'kaizerwing',
-                tweetText: 'Hello World'
-            },
-            {
-                name: 'Supasate Choochaisri',
-                screenName: 'kaizerwing',
-                tweetText: 'Sawasdee Thailand'
-            }
-        ];
+        $http.get('/statuses/me_timeline')
+        .success(function(response) {
+            $scope.tweets = response;
+        })
+        .error(function(response) {
+            $scope.error = response.message;
+        });
     }
 ]);
