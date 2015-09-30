@@ -1,0 +1,32 @@
+.container.body(data-ng-controller='UserTimelineController')
+  .left-panel
+    .profile
+      .header
+        .name {{ profile.name }}
+        .screen-name @{{ profile.screenName}}
+      // /.header
+      .detail
+        .col
+          .text Tweets
+          .number {{ profile.tweetCount}}
+        .col
+          .text Followers
+          .number {{ profile.followerCount }}
+        .col
+          .text Following
+          .number {{ profile.followingCount }}
+      .action.last-section
+        input.btn.btn-default.btn-lg(type='button', value='Follow', data-ng-click='follow(profile.screenName)')
+      // /.detail
+    // /.border-box .profile
+  .main-panel
+    .tweet(data-ng-repeat="tweet in tweets | orderBy: '-tweetTime'", data-ng-class="{'first-item' : $first}")
+      .name
+        | {{ tweet.name }}
+      .screen-name
+        |  @{{ tweet.screenName }}
+      .tweet-text
+        | {{ tweet.tweetTime }}
+      .action
+        .reply(data-ng-click="replyTo(tweet.screenName)")
+          i.fa.fa-reply
