@@ -12,6 +12,10 @@ angular.module('tweets')
         .state('feed', {
             url: '/',
             templateUrl: '/modules/tweets/views/feed.client.view.jade'
+        })
+        .state('usertimeline', {
+            url: '/u/:username',
+            templateUrl: '/modules/tweets/views/usertimeline.client.view.jade'
         });
     }
 ])
