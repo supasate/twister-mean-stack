@@ -26,7 +26,7 @@
       .screen-name
         |  @{{ tweet.screenName }}
       .tweet-text
-        | {{ tweet.tweetTime }}
+        | {{ tweet.tweetText }}
       .action
         .reply(data-ng-click="replyTo(tweet.screenName)")
           i.fa.fa-reply
