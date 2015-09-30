@@ -3,9 +3,9 @@ div(data-ng-controller='FeedController')
     .left-panel
       .profile
         .header
-          a(href='me.jade')
+          a(data-ui-sref='me')
             .name {{ profile.name }}
-          a(href='me.jade')
+          a(data-ui-sref='me')
             .screen-name @{{ profile.screenName }}
         // /.header
         .detail.last-section
