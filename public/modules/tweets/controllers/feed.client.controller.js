@@ -4,7 +4,8 @@ angular.module('tweets').controller('FeedController', [
     '$scope',
     '$modal',
     'Authentication',
-    function($scope, $modal, Authentication) {
+    '$http',
+    function($scope, $modal, Authentication, $http) {
         $scope.profile = {
             name: Authentication.user.displayName,
             screenName: Authentication.user.username,
@@ -48,8 +49,17 @@ angular.module('tweets').controller('FeedController', [
                 tweetTime: new Date().toISOString()
             });
 
-            $scope.tweetText = '';
-            $scope.profile.tweetCount += 1;
+            $http.post('/statuses/update', {
+                name: name,
+                screenName: screenName,
+                tweetText: tweetText,
+                tweetTime: new Date().toISOString()       
+            }).success(function(response) {
+                $scope.tweetText = '';
+                $scope.profile.tweetCount += 1;
+            }).error(function(response) {
+                $scope.error = response.message;
+            });
         };
 
         $scope.replyTo = function(screenName) {
