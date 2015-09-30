@@ -21,5 +21,8 @@ html(lang='en')
 
     block content
 
+    script(type="text/javascript").
+      var user = !{ JSON.stringify(user) }
+
     each jsFile in jsFiles
       script(src="#{jsFile}")
