@@ -96,3 +96,44 @@ exports.follow = function(req, res, next) {
         });
     }
 };
+
+exports.unfollow = function(req, res, next) {
+    if (req.user) {
+        var username = req.user.username;
+        var unfollowUsername = req.body.unfollow_username;
+
+        Following.update(
+            { username: username },
+            { $pull: { followings: unfollowUsername } },
+            function(err, following) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                }
+
+                Follower.update(
+                    { username: unfollowUsername },
+                    { $pull: { followers: username } },
+                    function(err, follower) {
+                        if (err) {
+                            return res.status(400).send({
+                                message: errorHandler.getErrorMessage(err)
+                            });
+                        }  
+                        
+                        res.json({
+                            is_following: false
+                        });                    
+                    }
+                );
+            }
+        );
+
+    } else {
+        res.status(400).send({
+            message: 'User is not signed in'
+        });
+
+    }
+};

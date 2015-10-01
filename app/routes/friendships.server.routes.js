@@ -5,4 +5,5 @@ module.exports = function(app) {
 
     app.route('/friendships/show/:username').get(friendships.show);
     app.route('/friendships/follow').post(friendships.follow);
+    app.route('/friendships/unfollow').post(friendships.unfollow);
 };
