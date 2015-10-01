@@ -51,8 +51,45 @@ exports.show = function(req, res, next) {
             });
         });
 
+    } else {
+        res.status(400).send({
+            message: 'User is not signed in'
+        });
+    }
+};
 
+exports.follow = function(req, res, next) {
+    if (req.user) {
+        var username = req.user.username;
+        var followUsername = req.body.follow_username;
+        Following.findOneAndUpdate(
+            { username: username }, // condition
+            { $addToSet: { followings: followUsername } }, // add to set if not exist
+            { upsert: true }, // update or insert to collection if not exist
+            function(err, following) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                }
 
+                Follower.findOneAndUpdate(
+                    { username: followUsername }, // condition
+                    { $addToSet: { followers: username } }, // add to set if not exist
+                    { upsert: true }, // update or insert to collection if not exist
+                    function(err, follower) {
+                        if (err) {
+                            return res.status(400).send({
+                                message: errorHandler.getErrorMessage(err)
+                            });
+                        }
+                        
+                        res.json({
+                            is_following: true
+                        });
+                    }
+                );
+            });
     } else {
         res.status(400).send({
             message: 'User is not signed in'
