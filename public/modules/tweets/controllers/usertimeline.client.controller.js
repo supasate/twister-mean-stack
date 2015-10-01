@@ -41,5 +41,17 @@ angular.module('tweets').controller('UserTimelineController', [
                 $scope.error = response.message;
             });
         };
+
+        $scope.unfollow = function(unfollowUsername) {
+            $http.post('/friendships/unfollow', {
+                unfollow_username: unfollowUsername
+            })
+            .success(function(response) {
+                $scope.profile.isFollowing = response.is_following;
+            })
+            .error(function(response) {
+                $scope.error = response.message;
+            });
+        };
     }
 ]);
