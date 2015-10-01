@@ -26,30 +26,33 @@ exports.show = function(req, res, next) {
             } else {
                 is_following = false;
             }
-        });
 
-        // Find is_followed
-        FollowerfindOne({
-            username: req.user.username,
-            followers: req.params.username
-        }, function(err, follower) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
+            // Find is_followed
+            Follower.findOne({
+                username: req.user.username,
+                followers: req.params.username
+            }, function(err, follower) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } 
+
+                if (follower) {
+                    is_followed = true;
+                } else {
+                    is_followed = false;
+                }
+                
+                res.json({
+                    is_following: is_following,
+                    is_followed: is_followed
                 });
-            } 
-
-            if (follower) {
-                is_followed = true;
-            } else {
-                is_followed = false;
-            }
+            });
         });
 
-        res.json({
-            is_following: is_following,
-            is_followed: is_followed
-        });
+
+
     } else {
         res.status(400).send({
             message: 'User is not signed in'

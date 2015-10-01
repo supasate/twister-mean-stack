@@ -4,6 +4,8 @@
       .header
         .name {{ profile.name }}
         .screen-name @{{ profile.screenName}}
+        .is-followed(data-ng-if='profile.isFollowed')
+          | follows you
       // /.header
       .detail
         .col
@@ -16,7 +18,8 @@
           .text Following
           .number {{ profile.followingCount }}
       .action.last-section
-        input.btn.btn-default.btn-lg(type='button', value='Follow', data-ng-click='follow(profile.screenName)')
+        input.btn.btn-default.btn-lg(type='button', value='Follow', data-ng-click='follow(profile.screenName)', data-ng-if='!profile.isFollowing')
+        input.btn.btn-primary.btn-lg(type='button', value='Unfollow', data-ng-click='unfollow(profile.screenName)', data-ng-if='profile.isFollowing')
       // /.detail
     // /.border-box .profile
   .main-panel
