@@ -29,5 +29,17 @@ angular.module('tweets').controller('UserTimelineController', [
         .error(function(response) {
             $scope.error = response.message;
         });
+
+        $scope.follow = function(followUsername) {
+            $http.post('/friendships/follow', {
+                follow_username: followUsername
+            })
+            .success(function(response) {
+                $scope.profile.isFollowing = response.is_following;
+            })
+            .error(function(response) {
+                $scope.error = response.message;
+            });
+        };
     }
 ]);
